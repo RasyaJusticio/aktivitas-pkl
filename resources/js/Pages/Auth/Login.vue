@@ -10,23 +10,22 @@ import InputError from "@/Components/Forms/InputError.vue";
 const form = useForm({
     email: "",
     password: "",
-    password_confirmation: "",
 });
 
 const submit = () => {
-    form.post(route("register"), {
-        onSuccess: () => form.reset("password", "password_confirmation"),
+    form.post(route("login"), {
+        onSuccess: () => form.reset("password"),
     });
 };
 </script>
 
 <template>
     <GuestLayout>
-        <Head title="Register" />
+        <Head title="Masuk" />
 
         <div class="p-5 bg-zinc-900 border border-zinc-800 rounded-xl w-96">
             <ApplicationLogo class="my-1" />
-            <h1 class="text-xl text-center tracking-wider mt-6 mb-1">Daftar</h1>
+            <h1 class="text-xl text-center tracking-wider mt-6 mb-1">Masuk</h1>
 
             <form @submit.prevent="submit" class="space-y-4">
                 <div>
@@ -49,37 +48,21 @@ const submit = () => {
                         type="password"
                         class-name="w-full mt-1"
                         v-model="form.password"
-                        autocomplete="current-password"
+                        autocomplete="new-password"
                     />
                     <InputError class="mt-1" :message="form.errors.password" />
                 </div>
 
-                <div>
-                    <InputLabel for="password_confirmation"
-                        >Konfirmasi Password</InputLabel
-                    >
-                    <Input
-                        id="password_confirmation"
-                        type="password"
-                        class-name="w-full mt-1"
-                        v-model="form.password_confirmation"
-                    />
-                    <InputError
-                        class="mt-1"
-                        :message="form.errors.password_confirmation"
-                    />
-                </div>
-
                 <Button class="w-full !mt-6" color="primary" variant="solid"
-                    >Daftar</Button
+                    >Masuk</Button
                 >
 
                 <p class="text-center text-zinc-300">
-                    Sudah memiliki akun?
+                    Belum memiliki akun?
                     <Link
-                        :href="route('login')"
+                        :href="route('register')"
                         class="text-emerald-400 underline hover:text-emerald-300 active:text-emerald-500"
-                        >Masuk
+                        >Daftar
                     </Link>
                 </p>
             </form>
