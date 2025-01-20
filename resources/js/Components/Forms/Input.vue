@@ -1,9 +1,9 @@
-<script setup lang="ts">
-import { onMounted, Ref, ref } from "vue";
-import clsx from "clsx";
+<script setup>
+import { onMounted, ref } from "vue";
+import { clsx } from "clsx";
 import { Eye, EyeOff } from "lucide-vue-next";
 
-const input: Ref<HTMLInputElement | null> = ref(null);
+const input = ref(null);
 const isPasswordVisible = ref(false);
 
 const props = defineProps({
@@ -48,9 +48,11 @@ defineOptions({
             ref="input"
             v-bind="$attrs"
             v-bind:type="
-                $attrs.type === 'password' && isPasswordVisible
-                    ? 'text'
-                    : 'password'
+                $attrs.type === 'password'
+                    ? isPasswordVisible
+                        ? 'text'
+                        : 'password'
+                    : $attrs.type
             "
         />
         <div
