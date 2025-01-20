@@ -16,7 +16,7 @@
     @inertiaHead
 </head>
 
-<body>
+<body class="font-sans antialiased" style="background-color: #09090b;">
     @inertia
 </body>
 
