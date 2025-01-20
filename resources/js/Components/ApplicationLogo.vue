@@ -12,7 +12,7 @@ const props = defineProps({
     <div
         :class="
             clsx(
-                'flex items-center text-3xl tracking-wider font-extrabold',
+                'flex items-center text-3xl tracking-wider font-extrabold justify-center',
                 props.class
             )
         "
