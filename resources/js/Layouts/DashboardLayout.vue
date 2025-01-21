@@ -1,11 +1,20 @@
 <script setup>
 import ApplicationLogo from "@/Components/ApplicationLogo.vue";
 import { Link } from "@inertiajs/vue3";
-import clsx from "clsx";
-import { Menu } from "lucide-vue-next";
+import { clsx } from "clsx";
+import { Home, Menu } from "lucide-vue-next";
 import { ref } from "vue";
 
 const isSidebarVisible = ref(false);
+const navigations = [
+    {
+        type: "link",
+        id: "dashboard",
+        label: "Dashboard",
+        path: "dashboard",
+        icon: Home,
+    },
+];
 </script>
 
 <template>
@@ -57,8 +66,42 @@ const isSidebarVisible = ref(false);
                     </Link>
                 </header>
                 <nav
-                    class="flex-1 bg-zinc-900 z-20 w-64 shadow-lg lg:bg-zinc-900/80 border-r border-zinc-800 px-4 py-5"
-                ></nav>
+                    class="flex flex-col gap-2 flex-1 bg-zinc-900 z-20 w-64 shadow-lg lg:bg-zinc-900/80 border-r border-zinc-800 px-4 py-5"
+                >
+                    <div
+                        v-for="nav in navigations"
+                        :key="nav.id"
+                        class="flex w-full"
+                    >
+                        <Link
+                            v-if="nav.type === 'link'"
+                            :href="nav.path"
+                            :class="
+                                clsx(
+                                    'px-3 hover:bg-zinc-800 flex items-center gap-2 w-full py-2 rounded-lg',
+                                    nav.path === route().current() &&
+                                        'bg-zinc-800 text-emerald-500'
+                                )
+                            "
+                        >
+                            <component
+                                :is="nav.icon"
+                                :class="
+                                    clsx(
+                                        nav.path === route().current()
+                                            ? 'text-emerald-500'
+                                            : 'text-zinc-400'
+                                    )
+                                "
+                                stroke-width="1.85"
+                                size="22"
+                            />
+                            <p class="font-medium">
+                                {{ nav.label }}
+                            </p>
+                        </Link>
+                    </div>
+                </nav>
             </div>
         </aside>
     </div>
